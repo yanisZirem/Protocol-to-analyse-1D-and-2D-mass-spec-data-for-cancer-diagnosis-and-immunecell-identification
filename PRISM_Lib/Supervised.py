@@ -1,6 +1,4 @@
 # Necessary libraries
-import lightgbm as lgb
-import xgboost as xgb
 from sklearn.discriminant_analysis import *
 import importlib
 from sklearn.pipeline import Pipeline
@@ -74,7 +72,7 @@ def plot_sample_spectrum(data, sample_index, color='orange'):
     # Display the plot
     fig.show()
 
-
+# Function to train 26 models from lazypredict library 
 def Train_models(data, target_column='Class', test_size=0.2, random_state=1):
     from sklearn.model_selection import train_test_split
     from lazypredict.Supervised import LazyClassifier
@@ -94,14 +92,13 @@ def Train_models(data, target_column='Class', test_size=0.2, random_state=1):
     
     return models, predictions
 
-# Function to find and build the best model based on F1 score
+# Function to find and build the best model based on F1 score and create a pipeline 
 def Find_and_build_best_model(data, models, specific_model=None):
     from sklearn.model_selection import train_test_split
 
     # Define the model mappings
     model_mapping = {
         'Perceptron': 'linear_model',
-        'LGBMClassifier': 'lightgbm',
         'PassiveAggressiveClassifier': 'linear_model',
         'LinearSVC': 'svm',
         'RidgeClassifierCV': 'linear_model',
@@ -157,12 +154,10 @@ def Find_and_build_best_model(data, models, specific_model=None):
                 print(f"Model {best_model_name} could not be imported from sklearn.")
                 return None, None
         else:
-            if best_model_name.startswith("LGBM"):
-                import lightgbm as lgb
-                best_model = getattr(lgb, best_model_name)()
-            elif best_model_name.startswith("XGB"):
-                import xgboost as xgb
-                best_model = getattr(xgb, best_model_name)()
+            if best_model_name.startswith("LGBMClassifier"):
+                import lightgbm
+                best_model = getattr(lightgbm, best_model_name)()
+            
             else:
                 print("Best Classifier not found.")
                 return None, None
