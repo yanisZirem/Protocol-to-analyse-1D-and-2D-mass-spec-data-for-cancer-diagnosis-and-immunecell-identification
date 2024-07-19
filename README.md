@@ -26,6 +26,7 @@ This repository contains:
 #### Install Anaconda:
 1. Visit [Anaconda](https://www.anaconda.com/download) and download the appropriate installer.
 2. Follow the installation instructions for your operating system.
+3. Create a new environemment 
 
 #### Launch Jupyter Notebook:
 1. Open Anaconda-Navigator and launch Jupyter Notebook.
@@ -33,7 +34,7 @@ This repository contains:
 #### Install Required Packages:
 1. In Jupyter Notebook, run the following code to install necessary packages:
    ```python
-   pip install numpy pandas scikit-learn matplotlib plotly pyimzml scipy
+   pip install numpy==1.24.3 pandas==2.0.3 scikit-learn==1.2.2 matplotlib==3.7.2 scipy==1.11.1 seaborn==0.12.2 statannot==0.2.3 lazypredict==0.2.12 joblib==1.3.1 eli5==0.13.0 pyimzml==1.5.3 plotly==5.17.0 lightgbm
 
 
 ## Pipeline Details
