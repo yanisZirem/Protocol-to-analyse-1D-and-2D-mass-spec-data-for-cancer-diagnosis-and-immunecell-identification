@@ -26,7 +26,7 @@ This repository contains:
 #### Install Anaconda:
 1. Visit [Anaconda](https://www.anaconda.com/download) and download the appropriate installer.
 2. Follow the installation instructions for your operating system.
-3. Create a new environemment 
+3. Create a new environment 
 
 #### Launch Jupyter Notebook:
 1. Open Anaconda-Navigator and launch Jupyter Notebook.
