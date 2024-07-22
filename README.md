@@ -1,4 +1,4 @@
-# README for Protocol to Analyze 1D and 2D Mass Spectrometry Data for Cancer Diagnosis and Immune Cell Identification
+# Protocol to Analyze 1D and 2D Mass Spectrometry Data for Cancer Diagnosis and Immune Cell Identification
 
 ## Overview
 
