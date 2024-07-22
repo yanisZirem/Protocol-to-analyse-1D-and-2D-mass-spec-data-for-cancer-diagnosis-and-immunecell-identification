@@ -84,7 +84,7 @@ def significant_features(data, alpha=0.05):
     return significant_columns
 
 # Function to display boxplots of significant features
-def boxplot_significant_features(data, mz_values, class_colors=None, test='Kruskal', loc='inside'):
+def boxplot_significant_features(data, mz_values, class_colors=None, test='Kruskal', loc='inside', show_scatter=False):
     label = 'Class'
     order = sorted(data[label].unique())  # Get sorted class labels
     box_pairs = list(combinations(order, 2))  # Create pairs of class labels for statistical annotation
@@ -99,23 +99,25 @@ def boxplot_significant_features(data, mz_values, class_colors=None, test='Krusk
     
     figsize_x = 16
     figsize_y = 5 * num_rows
-    fig, axes = plt.subplots(num_rows, num_cols, figsize=(figsize_x, figsize_y), dpi=100)
-    
-    if num_rows == 1:
-        axes = axes.reshape(1, -1)  # Ensure axes is always 2D
-    
-    # Plot boxplots for each m/z value
+    fig, axes = plt.subplots(num_rows, num_cols, figsize=(figsize_x, figsize_y), dpi=100, squeeze=False)
+
+    # Plot boxplots (and optionally scatter plots) for each m/z value
     for i, mz in enumerate(mz_values):
         x = "Class"
         y = mz
         row = i // num_cols
         col = i % num_cols
         ax = axes[row, col]
+        
         sns.boxplot(data=data, x=x, y=y, order=order, ax=ax, palette=custom_palette)
+        if show_scatter:
+            sns.swarmplot(data=data, x=x, y=y, order=order, ax=ax, color=".25")
+        
         ax.set_xticklabels(ax.get_xticklabels(), rotation=45)
         add_stat_annotation(ax, data=data, x=x, y=y, order=order, box_pairs=box_pairs,
                             test=test, text_format='star', loc='inside', verbose=0)
         ax.tick_params(axis='y', labelsize=8)
+        ax.set_title(f'Feature: {mz}')
     
     # Remove empty subplots
     for i in range(num_mz_values, num_rows * num_cols):
@@ -125,7 +127,7 @@ def boxplot_significant_features(data, mz_values, class_colors=None, test='Krusk
     plt.show()
 
 # Function to display individual boxplot of a specific m/z value
-def one_box_plot(data, mz, test='Kruskal', class_colors=None):
+def one_box_plot(data, mz, test='Kruskal', class_colors=None, show_scatter=False):
     label = 'Class'
     order = sorted(data[label].unique())  # Get sorted class labels
     box_pairs = list(combinations(order, 2))  # Create pairs of class labels for statistical annotation
@@ -137,14 +139,18 @@ def one_box_plot(data, mz, test='Kruskal', class_colors=None):
     
     plt.figure(figsize=(8, 6))
     ax = plt.gca()
+    
     sns.boxplot(data=data, x=x, y=y, order=order, ax=ax, palette=custom_palette)
+    if show_scatter:
+        sns.swarmplot(data=data, x=x, y=y, order=order, ax=ax, color=".25")
+    
     ax.set_xticklabels(ax.get_xticklabels(), rotation=30)
     add_stat_annotation(ax, data=data, x=x, y=y, order=order, box_pairs=box_pairs,
                         test=test, text_format='star', loc='outside', verbose=2)
     plt.show()
 
 # Function to display violin plots of significant features
-def violinplot_significant_features(data, mz_values, class_colors=None, test='Kruskal', loc='inside'):
+def violinplot_significant_features(data, mz_values, class_colors=None, test='Kruskal', loc='inside', show_scatter=False):
     label = 'Class'
     order = sorted(data[label].unique())  
     box_pairs = list(combinations(order, 2))  
@@ -159,25 +165,27 @@ def violinplot_significant_features(data, mz_values, class_colors=None, test='Kr
     
     figsize_x = 16
     figsize_y = 5 * num_rows
-    fig, axes = plt.subplots(num_rows, num_cols, figsize=(figsize_x, figsize_y), dpi=100)
-    
-    if num_rows == 1:
-        axes = axes.reshape(1, -1)  
-    
-    # Plot violin plots for each m/z value
+    fig, axes = plt.subplots(num_rows, num_cols, figsize=(figsize_x, figsize_y), dpi=100, squeeze=False)
+
+    # Plot boxplots (and optionally scatter plots) for each m/z value
     for i, mz in enumerate(mz_values):
         x = "Class"
         y = mz
         row = i // num_cols
         col = i % num_cols
         ax = axes[row, col]
+        
         sns.violinplot(data=data, x=x, y=y, order=order, ax=ax, palette=custom_palette)
+        if show_scatter:
+            sns.swarmplot(data=data, x=x, y=y, order=order, ax=ax, color=".25")
+        
         ax.set_xticklabels(ax.get_xticklabels(), rotation=45)
         add_stat_annotation(ax, data=data, x=x, y=y, order=order, box_pairs=box_pairs,
                             test=test, text_format='star', loc='inside', verbose=0)
         ax.tick_params(axis='y', labelsize=8)
+        ax.set_title(f'Feature: {mz}')
     
-    
+    # Remove empty subplots
     for i in range(num_mz_values, num_rows * num_cols):
         fig.delaxes(axes.flatten()[i])
     
@@ -185,17 +193,23 @@ def violinplot_significant_features(data, mz_values, class_colors=None, test='Kr
     plt.show()
 
 # Function to display individual violinplot of a specific m/z value
-def one_violin_plot(data, mz, test='Kruskal', class_colors=None):
+def one_violin_plot(data, mz, test='Kruskal', class_colors=None, show_scatter=False):
     label = 'Class'
     order = sorted(data[label].unique())  
-    box_pairs = list(combinations(order, 2))
-    print("Class labels in dataset:", order)  
+    box_pairs = list(combinations(order, 2)) 
+    print("Class labels in dataset:", order)
+    
     x = "Class"
     y = mz
     custom_palette = {class_label: class_colors.get(class_label, 'blue') for class_label in order}
+    
     plt.figure(figsize=(8, 6))
     ax = plt.gca()
+    
     sns.violinplot(data=data, x=x, y=y, order=order, ax=ax, palette=custom_palette)
+    if show_scatter:
+        sns.swarmplot(data=data, x=x, y=y, order=order, ax=ax, color=".25")
+    
     ax.set_xticklabels(ax.get_xticklabels(), rotation=30)
     add_stat_annotation(ax, data=data, x=x, y=y, order=order, box_pairs=box_pairs,
                         test=test, text_format='star', loc='outside', verbose=2)

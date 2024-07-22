@@ -72,7 +72,7 @@ def plot_sample_spectrum(data, sample_index, color='orange'):
     # Display the plot
     fig.show()
 
-# Function to train 26 models from lazypredict library 
+
 def Train_models(data, target_column='Class', test_size=0.2, random_state=1):
     from sklearn.model_selection import train_test_split
     from lazypredict.Supervised import LazyClassifier
@@ -92,7 +92,7 @@ def Train_models(data, target_column='Class', test_size=0.2, random_state=1):
     
     return models, predictions
 
-# Function to find and build the best model based on F1 score and create a pipeline 
+# Function to find and build the best model based on F1 score
 def Find_and_build_best_model(data, models, specific_model=None):
     from sklearn.model_selection import train_test_split
 
