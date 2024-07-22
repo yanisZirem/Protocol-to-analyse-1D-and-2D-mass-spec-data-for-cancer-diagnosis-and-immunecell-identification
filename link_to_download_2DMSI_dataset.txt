@@ -1,1 +1,1 @@
-The MSI dataset is available for download here: https://nextcloud.univ-lille.fr/index.php/s/2E85jCE2MB8Bmac
+The MSI dataset is available for download here: https://nextcloud.univ-lille.fr/index.php/s/2E85jCE2MB8Bmac or https://doi.org/10.7910/DVN/PRXHIJ
