@@ -65,5 +65,6 @@ Template_1D_Analysis and Template_2D_Analysis for using the pipeline functions a
 
 ## References
 - Zirem et al.,"Real-time glioblastoma tumor microenvironment assessment by SpiderMass for improved patient management." Cell Reports Medicine 5.4 (2024). DOI:https://doi.org/10.1016/j.xcrm.2024.101482
+- Zirem, Y., Ledoux, L., Salzet, M., & Fournier, I. (2024). Protocol to analyze 1D and 2D mass spectrometry data from glioblastoma tissues for cancer diagnosis and immune cell identification. STAR protocols, 5(3), 103285. DOI:https://doi.org/10.1016/j.xpro.2024.103285
 ## Contact
 For questions or issues, please contact Yanis Zirem at yanis.ziem16@gmail.com or yanis.zirem@univ-lille.fr.
